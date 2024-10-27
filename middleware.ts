@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const authenticated = cookies().get(keys.eid)?.value;
-  console.log(`Authenticated -- ${authenticated}`);
   if (!authenticated) return NextResponse.redirect(new URL(`/`, request.url));
   return NextResponse.next();
 }

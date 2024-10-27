@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fredoka } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
+import NextTopLoader from "nextjs-toploader";
 
-const inter = Inter({
+
+const lexend = Fredoka({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  title: "Playground",
-  description: "A simple Next.js app playground",
+  title: {
+    template: '%s | Demobutik',
+    default: "Demobutik showcasing pasby use-cases",
+  },
+  description: "Here you an intended service provider can freely test our services with your pasby eID. Have fun!",
 };
 
 export default function RootLayout({
@@ -22,9 +26,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx('h-full bg-gray-50 antialiased', inter.variable)}
+      className={clsx('h-full bg-gray-50 antialiased', lexend.className)} suppressHydrationWarning
     >
       <body className="flex h-full flex-col">
+        <NextTopLoader color={"#000"} />
         <div className="flex min-h-full flex-col">{children}</div>
       </body>
     </html>

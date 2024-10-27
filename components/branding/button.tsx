@@ -1,26 +1,35 @@
+"use client"
+
 import { useState } from "react";
-import Button, { ButtonType } from "./BrandButtons";
+import { ButtonType } from "./BrandButtons";
 import clsx from 'clsx'
 import { useRouter } from "next/navigation";
+import { capitalizeWords } from "@rebatlabs/ui-funs";
+import { Logo } from "../Logo";
 
-export type pasbyStyling = 'original' | 'dark' | 'light';
+export type pasbyStyling = 'original' | 'dark' | 'light' | 'darktext';
 
 const baseStyle = {
   original: {
     logoBgk: '#fff',
     logo: '#dd3e3e',
-    text: '#fff',
-    bgk: '#dd3e3e',
+    text: 'text-[#fff]',
+    bgk: 'bg-[#dd3e3e]',
   }, light: {
     logoBgk: '#dd3e3e',
     logo: '#fff',
-    text: '#dd3e3e',
-    bgk: '#fff',
+    text: 'text-[#dd3e3e]',
+    bgk: 'bg-[#fff]',
   }, dark: {
     logoBgk: '#dd3e3e',
     logo: '#fff',
-    text: '#fff',
-    bgk: '#2D3131',
+    text: 'text-[#fff]',
+    bgk: 'bg-[#2D3131]',
+  },darktext: {
+    logoBgk: '#fff',
+    logo: '#000',
+    text: 'text-[#000]',
+    bgk: 'bg-[#fff] border-zinc-950/10',
   },
 }
 
@@ -33,7 +42,7 @@ const variantStyle = {
 type ButtonProps = ({
   type: ButtonType;
   style: pasbyStyling;
-  className: string;
+  className?: string;
   onClick?: () => Promise<void>
 })
 
@@ -48,7 +57,7 @@ function Spinner({ className }: {
   );
 }
 
-export function AuthenticationButton({ type, style, onClick, className}: ButtonProps) {
+export function AuthenticationButton({ type, style, onClick, returnPage, className}: ButtonProps & {returnPage?: string}) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   
@@ -60,7 +69,7 @@ export function AuthenticationButton({ type, style, onClick, className}: ButtonP
       return;
     }
     try {
-      const response = await fetch('/api/eid/login');
+      const response = await fetch(`/api/eid/login${returnPage ? `?state=${returnPage}`: ''}`);
       const { url } = await response.json();
       router.push(url);
     } catch (e) {
@@ -74,9 +83,9 @@ export function AuthenticationButton({ type, style, onClick, className}: ButtonP
     <button
       type="button"
       onClick={handleClick}
-      className={clsx('relative flex justify-center items-center rounded-lg gap-2',
-      variantStyle[style],
-      'hover:brightness-125 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+      className={clsx('relative flex justify-center items-center rounded-lg gap-2 px-8 py-2 text-sm',
+        `${baseStyle[style].text} ${baseStyle[style].bgk} hover:${baseStyle[style].bgk}/[2.5%] focus:${baseStyle[style].bgk}/[5%]`,
+      'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:shadow-md focus:shadow-md',
       isLoading ? 'brightness-75' : '',
       className)}>
       {
@@ -84,13 +93,12 @@ export function AuthenticationButton({ type, style, onClick, className}: ButtonP
           <Spinner className="absolute right-2 w-5 h-5"/>
           : null
       }
-      <Button
-        type={type}
-        logoBgk={baseStyle[style].logoBgk}
-        logoTextColor={baseStyle[style].logo}
-        textColor={baseStyle[style].text}
-        background={baseStyle[style].bgk}
-      />
+      <Logo className="w-8 h-8" coloring={{
+        text: baseStyle[style].logo,
+        fill: baseStyle[style].logoBgk
+      }} />
+
+      {capitalizeWords(type)} with pasby
     </button>
   );
 }
