@@ -4,11 +4,7 @@ import { Heading, Subheading } from "@/components/heading";
 import { capitalizeWords } from "@rebatlabs/ui-funs";
 import { MyInformation } from "./information";
 import { getEID } from "@/session/getEID";
-
-const images = {
-  white: "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-2.png?v=1689798965&w=750&q=100",
-  black: "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-1.png?v=1689798965&w=1920&q=100",
-}
+import { images } from "@/lib/constants";
 
 const colorVariants = ["black", "white"];
 const sizeVariants = ["xs", "s", "md", "l", "xl"];
@@ -36,7 +32,7 @@ export default async function Page({ searchParams }: {
             </div>
           </div>
           <Heading level={2} className="text-2xl sm:text-3xl lg:text-4xl">Return of the seamless</Heading>
-          <div className="text-2xl">3, 200 NGN</div>
+          <div className="text-2xl">18, 200 NGN</div>
           <div />
           <Subheading>Checkout direct</Subheading>
           <p>Try out purchase confirmation with your own data and carry out test payments with a smooth 3D secure interface using the power of pasby eIDs. In this demonstration no money changes hands and we do not store or use your personal information for anything outside this demonstration.</p>

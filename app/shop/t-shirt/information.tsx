@@ -61,11 +61,11 @@ function Form({ eid }: { eid?: Record<string, unknown> }) {
   }
 
   return (
-    <form className="space-y-4 w-full" onSubmit={onSubmit}>
+    <form className="space-y-4 w-full" action={onSubmit}>
       <div className="grid grid-cols-2 gap-4">
         {fields.map((field, index) => (
           <div key={index}>
-            <input className="w-full border rounded-r p-2" placeholder={field.label} type={field.type}
+            <input className="w-full border rounded-r p-2" required placeholder={field.label} type={field.type}
               defaultValue={getValueByQuery(eid, field.map)} disabled={getValueByQuery(eid, field.map) !== undefined} />
           </div>
         ))}

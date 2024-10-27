@@ -5,11 +5,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const authenticated = cookies().get(keys.eid)?.value;
-  if (!authenticated) return NextResponse.redirect(new URL(`/`, request.url));
+  // if (!authenticated) return NextResponse.redirect(new URL(`/shop/t-shirt`, request.url));
   return NextResponse.next();
 }
 
 
 export const config = {
-  matcher: ["/dashboard", "/dashboard/:path*"],
+  matcher: ["/shop/cart-checkout"],
 };
