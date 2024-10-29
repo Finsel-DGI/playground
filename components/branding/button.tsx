@@ -57,6 +57,43 @@ function Spinner({ className }: {
   );
 }
 
+export function PasbyButton({ type, style, onClick, className }: ButtonProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    if (!onClick) {
+      setIsLoading(false);
+      return;
+    }
+    await onClick();
+    setIsLoading(false);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      className={clsx('relative flex justify-center items-center rounded-lg gap-2 px-8 py-2 text-sm',
+        `${baseStyle[style].text} ${baseStyle[style].bgk} hover:${baseStyle[style].bgk}/[2.5%] focus:${baseStyle[style].bgk}/[5%]`,
+        'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:shadow-md focus:shadow-md',
+        isLoading ? 'brightness-75' : '',
+        className)}>
+      {
+        isLoading ?
+          <Spinner className="absolute right-2 w-5 h-5" />
+          : null
+      }
+      <Logo className="w-8 h-8" coloring={{
+        text: baseStyle[style].logo,
+        fill: baseStyle[style].logoBgk
+      }} />
+
+      {capitalizeWords(type)} with pasby
+    </button>
+  );
+}
+
 export function AuthenticationButton({ type, style, onClick, returnPage, className}: ButtonProps & {returnPage?: string}) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -73,7 +110,7 @@ export function AuthenticationButton({ type, style, onClick, returnPage, classNa
       const { url } = await response.json();
       router.push(url);
     } catch (e) {
-      console.error((e as Error).message)
+      console.error(`pasby button click error: ${(e as Error).message}`)
     } finally {
       setIsLoading(false);
     }
