@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx('h-full bg-gray-50 antialiased', lexend.className)} suppressHydrationWarning
+      className={clsx('h-full bg-white antialiased', lexend.className)} suppressHydrationWarning
     >
       <body className="flex h-full flex-col">
         <NextTopLoader color={"#000"} />
