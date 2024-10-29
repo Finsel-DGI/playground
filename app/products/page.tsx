@@ -17,9 +17,9 @@ const options = [
     out: true,
     description: "Straight forward authentication - simple and secure"
   }, {
-    header: "3Ds card secure",
+    header: "3D secure card authentication",
     out: true,
-    href: "/shop",
+    href: "/shop/cart-checkout",
     description: "Streamline the card transaction flows while meeting strong PSD2 compliancy."
   },
 ]

@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const eid = await getEID();
 
-  // if (!eid) redirect("/");
+  if (!eid) redirect("/");
 
   return (
     <main className="min-h-screen">
@@ -29,7 +29,7 @@ export default async function Page() {
           />
           <div className="text-2xl">18, 200 NGN</div>
         </div>
-        <div className="w-[40%] h-screen flex flex-col shadow-md py-4 px-10">
+        <div className="lg:w-[40%] h-screen flex flex-col lg:shadow-md py-4 px-10">
           <CheckoutElement eid={eid}/>
         </div>
       </div>
