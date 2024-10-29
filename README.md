@@ -27,7 +27,7 @@ To get started with the Demobutik application, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Finsel-DGI/playground.git
    ```
 
 2. Navigate to the project directory:
