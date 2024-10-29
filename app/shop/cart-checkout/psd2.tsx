@@ -127,9 +127,9 @@ function Body({ onConfirmAction, onError }: {
         <p> {date}</p>
         <p>424242******4242</p>
       </div>
-      <p className="text-sm font-light">Select "Confirm with pasby" to proceed to payment</p>
+      <p className="text-sm font-light">Select &quot;Confirm with pasby&quot; to proceed to payment</p>
 
-      <PasbyButton type='confirm' style="dark" className="" onClick={onConfirm} />
+      <PasbyButton type='confirm' style="dark" onClick={onConfirm} />
     </div>
   )
 }
