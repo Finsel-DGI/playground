@@ -1,8 +1,11 @@
 "use client"
+
 import { Input } from "@/components/input";
 import { User } from "@finsel-dgi/pasby-react";
 import { getValueByQuery } from "@rebatlabs/ui-funs";
 import { PSDDialog } from "./psd2";
+import { useState } from "react";
+import { CheckCheckIcon } from "lucide-react";
 
 const card = {
   digits: "4242 4242 4242 4242",
@@ -12,14 +15,20 @@ const card = {
 
 export function CheckoutElement({ eid }: { eid?: User }) {
   const claims = eid?.claims;
+  let [paid, setPaid] = useState(false);
+
+  const onPaid = (val: boolean) => {
+    if (!val) return;
+    setPaid(true);
+  }
+
   return (
     <div>
-      <div className="mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0">
+     {!paid && (<div className="mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0">
         <div>
           <h3 id="contact-info-heading" className="text-lg font-medium text-gray-900">
             Contact information
           </h3>
-
           <div className="mt-6">
             <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
               Email address
@@ -157,9 +166,15 @@ export function CheckoutElement({ eid }: { eid?: User }) {
         </div>
 
         <div className="mt-10 flex justify-end border-t border-gray-200 pt-6">
-          <PSDDialog/>
+          <PSDDialog onPaymentCompleted={onPaid}/>
         </div>
-      </div>
+      </div>)}
+      {paid && (
+        <div className="flex flex-col justify-center items-center gap-2">
+          <CheckCheckIcon className="w-32 h-32 text-green-800"/>
+          <div>Thank you for your payment</div>
+        </div>
+      )}
     </div>
   );
 }
