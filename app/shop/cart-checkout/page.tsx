@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const eid = await getEID();
 
-  if (!eid) redirect("/");
+  // if (!eid) redirect("/");
 
   return (
     <main className="min-h-screen">

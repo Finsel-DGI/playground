@@ -1,10 +1,8 @@
 "use client"
-
 import { Input } from "@/components/input";
-import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { User } from "@finsel-dgi/pasby-react";
 import { getValueByQuery } from "@rebatlabs/ui-funs";
-import { useState } from "react";
+import { PSDDialog } from "./psd2";
 
 const card = {
   digits: "4242 4242 4242 4242",
@@ -12,8 +10,8 @@ const card = {
   cvv: "202",
 }
 
-export function CheckoutElement({ eid }: { eid: User }) {
-  const claims = eid.claims;
+export function CheckoutElement({ eid }: { eid?: User }) {
+  const claims = eid?.claims;
   return (
     <div>
       <div className="mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0">
@@ -32,7 +30,7 @@ export function CheckoutElement({ eid }: { eid: User }) {
                 name="email-address"
                 type="email"
                 disabled
-                defaultValue={eid.claims?.contact?.email}
+                defaultValue={claims?.contact?.email}
                 autoComplete="email"
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
@@ -159,23 +157,9 @@ export function CheckoutElement({ eid }: { eid: User }) {
         </div>
 
         <div className="mt-10 flex justify-end border-t border-gray-200 pt-6">
-          <PSD/>
+          <PSDDialog/>
         </div>
       </div>
     </div>
-  );
-}
-
-function PSD() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <button
-          className="rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-        >
-          Pay now
-        </button>
-      </AlertDialogTrigger>
-    </AlertDialog>
   );
 }
