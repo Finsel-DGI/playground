@@ -1,18 +1,19 @@
 "use client"
 
-import { AuthenticationButton } from "@/components/branding/button";
 import { Button } from "@/components/button";
 import { Text } from "@/components/text";
 import { User } from "@finsel-dgi/pasby-react";
 import { getValueByQuery } from "@rebatlabs/ui-funs";
 import { useRouter } from "next/navigation";
+import { LoginButton } from "@finsel-dgi/pasby-next";
 
 export function MyInformation({eid}: {eid?: User}) {
   return (
     <div className="rounded-xl ring-1 ring-gray-200 flex flex-col items-center px-10 py-8 space-y-4">
       {!eid && (
         <>
-          <AuthenticationButton style='dark' type='identify' className="lg:w-[60%] w-[90%]" returnPage="/shop/t-shirt" />
+          {/* <AuthenticationButton style='dark' type='identify' className="lg:w-[60%] w-[90%]" returnPage="/shop/t-shirt" /> */}
+          <LoginButton variant="dark" action='identify' className="lg:w-[60%] w-[90%]" fallbackPath="/shop/t-shirt"/>
           <div className="flex w-full items-center gap-2">
             <div className="w-[60%] bg-gray-300 h-[.1rem]" />
             <Text>Or</Text>

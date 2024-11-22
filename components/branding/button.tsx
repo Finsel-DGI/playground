@@ -108,7 +108,9 @@ export function AuthenticationButton({ type, style, onClick, returnPage, classNa
     try {
       const response = await fetch(`/api/eid/login${returnPage ? `?state=${returnPage}`: ''}`);
       const { url } = await response.json();
-      router.push(url);
+      if (url) {
+        router.push(url);
+      }
     } catch (e) {
       console.error(`pasby button click error: ${(e as Error).message}`)
     } finally {

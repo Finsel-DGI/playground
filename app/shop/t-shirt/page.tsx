@@ -3,8 +3,9 @@
 import { Heading, Subheading } from "@/components/heading";
 import { capitalizeWords } from "@rebatlabs/ui-funs";
 import { MyInformation } from "./information";
-import { getEID } from "@/session/getEID";
 import { images } from "@/lib/constants";
+import { getEID } from "@finsel-dgi/pasby-next/server";
+import { cookies } from "next/headers";
 
 const colorVariants = ["black", "white"];
 const sizeVariants = ["xs", "s", "md", "l", "xl"];
@@ -15,7 +16,8 @@ export default async function Page({ searchParams }: {
   const color = searchParams.color as string | undefined;
   const size = searchParams.size as string | undefined;
 
-  const eid = await getEID();
+  const cookieStore = cookies();
+  const eid = await getEID(cookieStore);
 
   return (
     <main className="min-h-screen py-10">

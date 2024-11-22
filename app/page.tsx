@@ -28,7 +28,7 @@ export default function Page() {
             </li>
           ))}
         </ul>
-        <div className="py-8"/>
+        <div className="py-8" />
         <Button href={'/products'}>
           <div className="text-lg">Ready, steady, go!</div>
         </Button>

@@ -3,14 +3,15 @@ import { Link } from "@/components/link";
 import { images } from "@/lib/constants";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { CheckoutElement } from "./checkout";
-import { getEID } from "@/session/getEID";
 import { redirect } from "next/navigation";
+import { getEID } from "@finsel-dgi/pasby-next/server";
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const eid = await getEID();
+  const cookieStore = cookies();
+  const eid = await getEID(cookieStore);
 
   if (!eid) redirect("/");
-
   return (
     <main className="min-h-screen">
       <div className="flex h-screen">

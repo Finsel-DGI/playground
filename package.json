@@ -6,8 +6,8 @@
     "dev": "next dev -p 3430",
     "build": "next build",
     "start": "next start",
-    "link:sdk": "npm link /Users/jackmay/Github/packages/pasby-auth-react",
-    "unlink:sdk": "npm unlink /Users/jackmay/Github/packages/pasby-auth-react",
+    "link:sdk": "npm link /Users/jackmay/Github/packages/pasby-nextjs",
+    "unlink:sdk": "npm unlink /Users/jackmay/Github/packages/pasby-nextjs",
     "lint": "next lint"
   },
   "dependencies": {

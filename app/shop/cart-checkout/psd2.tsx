@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/button";
 import { Subheading } from "@/components/heading";
 import dayjs from "dayjs";
-import { PasbyButton } from "@/components/branding/button";
+import { PasbyButton } from "@finsel-dgi/pasby-next";
 import { requestToNextSever } from "@/actions/client";
 import { PollEIDComponent } from "@finsel-dgi/pasby-react";
 
@@ -129,7 +129,7 @@ function Body({ onConfirmAction, onError }: {
       </div>
       <p className="text-sm font-light">Select &quot;Confirm with pasby&quot; to proceed to payment</p>
 
-      <PasbyButton type='confirm' style="dark" onClick={onConfirm} />
+      <PasbyButton action='confirm' variant="dark" onClick={onConfirm} />
     </div>
   )
 }
